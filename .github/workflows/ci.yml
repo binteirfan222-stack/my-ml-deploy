@@ -1,0 +1,25 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install
+        run: pip install -r requirements.txt
+      - name: Train
+        run: python train.py
+      - name: Convert to ONNX
+        run: python convert_to_onnx.py
+      - name: Commit ONNX model
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add App/model.onnx
+          git commit -m "Update model.onnx" || echo "No changes"
+          git pushdir .github\workflows

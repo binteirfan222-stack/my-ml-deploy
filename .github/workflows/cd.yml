@@ -1,0 +1,21 @@
+name: Continuous Deployment
+
+on:
+  workflow_run:
+    workflows: ["Continuous Integration"]
+    types: [completed]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install HF CLI
+        run: pip install -U "huggingface_hub[cli]"
+      - name: Deploy to Hugging Face
+        env:
+          HF: ${{ secrets.HF }}
+        run: |
+          huggingface-cli login --token $HF --add-to-git-credential
+          huggingface-cli upload binteirfan222-stack/my-ml-static-app ./App --repo-type=space --commit-message="Deploy static app"
