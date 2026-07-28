@@ -1,3 +1,6 @@
+ort.env.wasm.wasmPaths = "https://cdnjs.cloudflare.com/ajax/libs/onnxruntime-web/1.17.0/";
+ort.env.wasm.numThreads = 1;
+
 let session = null;
 
 async function loadModel() {
