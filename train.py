@@ -3,6 +3,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import skops.io as sio
+import os
+
+os.makedirs("./Results", exist_ok=True)
+os.makedirs("./Model", exist_ok=True)
 
 df = pd.read_csv("./Data/dataset.csv")
 X = df.drop(columns=["target"])
