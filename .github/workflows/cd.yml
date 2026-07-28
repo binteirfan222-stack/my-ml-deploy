@@ -17,5 +17,5 @@ jobs:
         env:
           HF: ${{ secrets.HF }}
         run: |
-          huggingface-cli login --token $HF --add-to-git-credential
-          huggingface-cli upload binteirfan222-stack/my-ml-static-app ./App --repo-type=space --commit-message="Deploy static app"
+          hf auth login --token $HF --add-to-git-credential
+          hf upload binteirfan222-stack/my-ml-static-app ./App --repo-type=space --commit-message="Deploy static app"
