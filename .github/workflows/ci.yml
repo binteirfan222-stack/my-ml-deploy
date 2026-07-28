@@ -22,4 +22,4 @@ jobs:
           git config user.email "actions@github.com"
           git add App/model.onnx
           git commit -m "Update model.onnx" || echo "No changes"
-          git pushdir .github\workflows
+          git push
